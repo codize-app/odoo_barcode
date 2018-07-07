@@ -1,0 +1,118 @@
+.odoo-app{
+  background: url('../assets/img/odoo_logo.png') no-repeat;
+  background-size: cover;
+  position: absolute;
+  left: 50%;
+  top: 10px;
+  width: 621px;
+  height:196px;
+  margin: 0 0px 0px -310px;
+}
+h1{
+  color: #fff;
+  right: 0;
+  bottom: -20px;
+  position: absolute;
+  margin: 0;
+  font-size: 15px;
+}
+h2{
+  color: #fff;
+  overflow: hidden;
+  border-bottom: 1px solid #fff;
+  font-size:14px;
+}
+h3{
+  color: #fff;
+  overflow: hidden;
+  font-size:13px;
+}
+p{
+  color: #fff;
+  font-size:12px;
+}
+hr{
+  border: 0;
+  height: 1px;
+  background: #fff;
+  opacity:0.6;
+}
+footer{
+  position: absolute;
+  bottom: 5px;
+}
+.odoo-input{
+  position: absolute;
+  left: 50%;
+  top: 250px;
+  width: 621px;
+  height:auto;
+  margin: 0 0px 0px -310px;
+}
+.mo-logo{
+  opacity: 0.5;
+}
+.mat-input{
+  width:100%;
+  margin-top:-10px;
+  margin-bottom:-5px;
+}
+input.mat-input-element {
+  color:#fff;
+}
+.mat-button{
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  margin-bottom:5px;
+}
+.mat-button button{
+  width:100%;
+}
+
+/*Odoo Logged*/
+.loading{
+  display: flex;
+  align-content: center;
+  align-items: center;
+  justify-content: space-around;
+}
+.odoo-logged{}
+
+/*Responsive*/
+@media (max-width: 650px) {
+  .odoo-app{
+    width: 301px;
+    height: 95px;
+    margin: 0 0px 0px -150px;
+  }
+  .odoo-input{
+    width: 301px;
+    top: 150px;
+    margin: 0 0px 0px -150px;
+  }
+}
+@media (max-width: 420px) {
+  .odoo-app{
+    width: 250px;
+    height: 79px;
+    margin: 0 0px 0px -125px;
+  }
+  .odoo-input{
+    width: 250px;
+    top: 130px;
+    margin: 0 0px 0px -125px;
+  }
+}
+@media (max-width: 300px) {
+  .odoo-app{
+    width: 200px;
+    height: 63px;
+    margin: 0 0px 0px -100px;
+  }
+  .odoo-input{
+    width: 200px;
+    top: 110px;
+    margin: 0 0px 0px -100px;
+  }
+}
