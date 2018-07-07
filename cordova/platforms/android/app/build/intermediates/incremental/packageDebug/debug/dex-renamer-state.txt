@@ -1,4 +1,0 @@
-#Sat Jul 07 18:15:35 ART 2018
-base.0=/home/ignacio/Angular/odoo-barcode/cordova/platforms/android/app/build/intermediates/transforms/dexMerger/debug/0
-renamed.0=classes.dex
-file.0=/home/ignacio/Angular/odoo-barcode/cordova/platforms/android/app/build/intermediates/transforms/dexMerger/debug/0/classes.dex
