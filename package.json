@@ -9,9 +9,9 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "cordova": "ng build --prod --build-optimizer --base-href . --output-hashing none --output-path cordova/www/",
-    "cordova-run": "npm run cordova && cd cordova && cordova run android",
-    "cordova-build": "npm run cordova && cd cordova && cordova build android --release",
-    "cordova-debug": "npm run cordova && cd cordova && cordova build android --debug"
+    "cordova:run:android": "npm run cordova && cd cordova && cordova run android",
+    "cordova:build:android": "npm run cordova && cd cordova && cordova build android --release",
+    "cordova:debug:android": "npm run cordova && cd cordova && cordova build android --debug"
   },
   "private": true,
   "dependencies": {
