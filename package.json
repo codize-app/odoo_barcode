@@ -27,7 +27,9 @@
     "@angular/platform-browser-dynamic": "^7.2.9",
     "@angular/router": "^7.2.9",
     "core-js": "^2.6.5",
+    "odoo-xmlrpc": "^1.0.7",
     "rxjs": "^6.4.0",
+    "stream": "0.0.2",
     "zone.js": "^0.8.29"
   },
   "devDependencies": {
