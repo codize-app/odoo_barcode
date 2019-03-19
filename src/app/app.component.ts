@@ -1,8 +1,8 @@
-import { Component, ViewChild, ElementRef } from '@angular/core';
+import { Component, ViewChild, ElementRef, OnInit } from '@angular/core';
 import { trigger, state, style, animate, transition, keyframes } from '@angular/animations';
-declare var navigator:any;
-declare var window:any;
-declare var cordova:any;
+declare var navigator: any;
+declare var window: any;
+declare var cordova: any;
 
 @Component({
   selector: 'app-root',
@@ -28,83 +28,85 @@ declare var cordova:any;
     ])
   ]
 })
-export class AppComponent {
-  public title:string = 'barcode';
-  ////////////////////////////
-  @ViewChild('form') form:ElementRef;
-  public server:string = "";
-  public user:string = "";
-  ////////////////////////////
-  public logState: string = "inactive";
-  ////////////////////////////
-  public showData: boolean = false;
-  public inLoad: boolean = true;
-  ////////////////////////////
-  public barcode: string = "";
-  public barcode_format: string = "";
 
-  constructor(){}
+export class AppComponent implements OnInit {
+  public title = 'barcode';
+  ////////////////////////////
+  @ViewChild('form') form: ElementRef;
+  public server = '';
+  public user = '';
+  ////////////////////////////
+  public logState = 'inactive';
+  ////////////////////////////
+  public showData = false;
+  public inLoad = true;
+  ////////////////////////////
+  public barcode = '';
+  public barcode_format = '';
 
-  public ngOnInit(): void{
-    document.addEventListener("deviceready", this.onDeviceReady, false);
+  constructor() {}
+
+  public ngOnInit(): void {
+    document.addEventListener('deviceready', this.onDeviceReady, false);
   }
 
-  public onDeviceReady(): void{
-    console.log("Device is Ready");
+  public onDeviceReady(): void {
+    console.log('Device is Ready');
   }
 
-  public startScann(): void{
-    let this_ = this;
-    this.barcode = "";
-    this.barcode_format = "";
+  public startScann(): void {
+    const this_ = this;
+    this.barcode = '';
+    this.barcode_format = '';
 
     cordova.plugins.barcodeScanner.scan(
       function (result) {
         this_.barcode = result.text;
         this_.barcode_format = result.format;
-        console.log("We got a barcode\n" +
-                    "Result: " + result.text + "\n" +
-                    "Format: " + result.format + "\n" +
-                    "Cancelled: " + result.cancelled);
+        console.log('We got a barcode\n' +
+                    'Result: ' + result.text + '\n' +
+                    'Format: ' + result.format + '\n' +
+                    'Cancelled: ' + result.cancelled);
       },
       function (error) {
-        console.log("Scanning failed: "+ error);
+        console.log('Scanning failed: ' + error);
       },
       {
         preferFrontCamera : false, // iOS and Android
         showFlipCameraButton : false, // iOS and Android
         showTorchButton : true, // iOS and Android
         torchOn: false, // Android, launch with the torch switched on (if available)
-        prompt : "Place a barcode inside the scan area", // Android
+        prompt : 'Place a barcode inside the scan area', // Android
         resultDisplayDuration: 0, // Time of show
-        orientation : "portrait", // Android only (portrait|landscape), default unset so it rotates with the device
+        orientation : 'portrait', // Android only (portrait|landscape), default unset so it rotates with the device
         disableAnimations : true, // iOS
         disableSuccessBeep: false // iOS and Android
       }
    );
   }
 
-  public readOdooData(e): void{
+  public readOdooData(e: any): void {
     e.preventDefault();
-    console.log("Data Readed");
-    console.log("Server: ", this.form.nativeElement.elements["server"].value);
-    console.log("User: ", this.form.nativeElement.elements["user"].value);
-    console.log("Pass: ", this.form.nativeElement.elements["pass"].value);
+    console.log('Data Readed');
+    console.log('Server: ', this.form.nativeElement.elements['server'].value);
+    console.log('DB: ', this.form.nativeElement.elements['db'].value);
+    console.log('User: ', this.form.nativeElement.elements['user'].value);
+    console.log('Pass: ', this.form.nativeElement.elements['pass'].value);
 
-    this.server = this.form.nativeElement.elements["server"].value;
-    this.user = this.form.nativeElement.elements["user"].value;
+    this.server = this.form.nativeElement.elements['server'].value;
+    this.user = this.form.nativeElement.elements['user'].value;
 
     ////////////////////////////////////////////////////////////////////////
 
     this.logState = 'active';
 
-    let this_ = this;
-    setTimeout(function(){
+    const this_ = this;
+    setTimeout(function() {
       this_.showData = true;
     }, 300);
   }
 
-  public logOut(){
+  public logOut() {
     this.form.nativeElement.reset();
     this.showData = false;
     this.logState = 'inactive';

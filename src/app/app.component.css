@@ -41,6 +41,13 @@ footer{
   position: absolute;
   bottom: 5px;
 }
+.pcp {
+  margin-top:15px;
+  font-size:11px;
+  color: #fefefe;
+  text-shadow: 0 1px 1px #010101;
+  opacity:0.4;
+}
 .odoo-input{
   position: absolute;
   left: 50%;
@@ -77,7 +84,6 @@ input.mat-input-element {
   align-items: center;
   justify-content: space-around;
 }
-.odoo-logged{}
 
 /*Responsive*/
 @media (max-width: 650px) {

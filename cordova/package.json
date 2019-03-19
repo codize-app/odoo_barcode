@@ -10,9 +10,9 @@
     "author": "Moldeo Interactive",
     "license": "Apache-2.0",
     "dependencies": {
-        "cordova-android": "^7.0.0",
+        "cordova-android": "^7.1.4",
         "cordova-plugin-whitelist": "^1.3.3",
-        "phonegap-plugin-barcodescanner": "^8.0.0"
+        "phonegap-plugin-barcodescanner": "^8.0.1"
     },
     "cordova": {
         "plugins": {
