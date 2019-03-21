@@ -26,10 +26,10 @@
 </div>
 
 <div class="odoo-logged odoo-input" *ngIf="showData">
-  <!--div class="loading">
+  <div class="loading" *ngIf="inLoad">
     <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
-  </div-->
-  <div class="odoo-content-data">
+  </div>
+  <div class="odoo-content-data" *ngIf="!inLoad">
     <h2>{{server}}</h2>
     <h3>User: {{user}}</h3>
     <div class="mat-button">

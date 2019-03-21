@@ -27,7 +27,8 @@
     "@angular/platform-browser-dynamic": "^7.2.9",
     "@angular/router": "^7.2.9",
     "core-js": "^2.6.5",
-    "odoo-xmlrpc": "^1.0.7",
+    "jquery": "^3.3.1",
+    "jquery-xmlrpc": "^0.4.4",
     "rxjs": "^6.4.0",
     "stream": "0.0.2",
     "zone.js": "^0.8.29"
@@ -40,6 +41,7 @@
     "@types/jasmine": "~3.3.11",
     "@types/jasminewd2": "~2.0.6",
     "@types/node": "~11.11.3",
+    "@types/jquery": "^3.3.29",
     "codelyzer": "~5.0.0-beta.1",
     "jasmine-core": "~3.3.0",
     "jasmine-spec-reporter": "~4.2.1",

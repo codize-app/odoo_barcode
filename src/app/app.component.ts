@@ -1,5 +1,7 @@
 import { Component, ViewChild, ElementRef, OnInit } from '@angular/core';
 import { trigger, state, style, animate, transition, keyframes } from '@angular/animations';
+declare var jquery: any;
+declare var $: any;
 declare var navigator: any;
 declare var window: any;
 declare var cordova: any;
@@ -34,7 +36,9 @@ export class AppComponent implements OnInit {
   ////////////////////////////
   @ViewChild('form') form: ElementRef;
   public server = '';
+  public db = '';
   public user = '';
+  public pass = '';
   ////////////////////////////
   public logState = 'inactive';
   ////////////////////////////
@@ -60,7 +64,7 @@ export class AppComponent implements OnInit {
     this.barcode_format = '';
 
     cordova.plugins.barcodeScanner.scan(
-      function (result) {
+      function (result: any) {
         this_.barcode = result.text;
         this_.barcode_format = result.format;
         console.log('We got a barcode\n' +
@@ -68,7 +72,7 @@ export class AppComponent implements OnInit {
                     'Format: ' + result.format + '\n' +
                     'Cancelled: ' + result.cancelled);
       },
-      function (error) {
+      function (error: any) {
         console.log('Scanning failed: ' + error);
       },
       {
@@ -94,21 +98,50 @@ export class AppComponent implements OnInit {
     console.log('Pass: ', this.form.nativeElement.elements['pass'].value);
 
     this.server = this.form.nativeElement.elements['server'].value;
+    this.db = this.form.nativeElement.elements['db'].value;
     this.user = this.form.nativeElement.elements['user'].value;
+    this.pass = this.form.nativeElement.elements['pass'].value;
 
     ////////////////////////////////////////////////////////////////////////
 
-    this.logState = 'active';
+    const forcedUserValue = $.xmlrpc.force('string', this.user);
+    const forcedPasswordValue = $.xmlrpc.force('string', this.pass);
+    const forcedDbNameValue = $.xmlrpc.force('string', this.db);
+    const server_url = this.server + '/xmlrpc';
 
     const this_ = this;
+
+    $.xmlrpc({
+      url: server_url + '/common',
+      methodName: 'login',
+      dataType: 'xmlrpc',
+      crossDomain: true,
+      params: [forcedDbNameValue, forcedUserValue, forcedPasswordValue],
+      success: function(response: any, status: any, jqXHR: any) {
+        console.log(response + '-' + status);
+        if (response) {
+          this_.inLoad = false;
+        } else {
+          this_.logOut();
+        }
+      },
+      error: function(jqXHR: any, status: any, error: any) {
+        console.log('Err: ' + jqXHR + '-' + status + '-' + error);
+        this_.logOut();
+      }
+    });
+
+    this.logState = 'active';
+
     setTimeout(function() {
       this_.showData = true;
     }, 300);
   }
 
-  public logOut() {
+  public logOut(): void {
     this.form.nativeElement.reset();
     this.showData = false;
+    this.inLoad = true;
     this.logState = 'inactive';
   }
 }
