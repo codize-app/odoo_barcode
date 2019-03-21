@@ -1,5 +1,6 @@
-import { Component, ViewChild, ElementRef, OnInit } from '@angular/core';
+import { Component, ViewChild, ElementRef, OnInit, Renderer2 } from '@angular/core';
 import { trigger, state, style, animate, transition, keyframes } from '@angular/animations';
+import { timer } from 'rxjs';
 declare var jquery: any;
 declare var $: any;
 declare var navigator: any;
@@ -49,14 +50,12 @@ export class AppComponent implements OnInit {
   public barcode = '';
   public barcode_format = '';
 
-  constructor() {}
+  constructor(private renderer: Renderer2) {}
 
   public ngOnInit(): void {
-    document.addEventListener('deviceready', this.onDeviceReady, false);
-  }
-
-  public onDeviceReady(): void {
-    console.log('Device is Ready');
+    this.renderer.listen('document', 'deviceready', () => {
+      console.log('Device is Ready');
+    });
   }
 
   public startScann(): void {
@@ -111,9 +110,11 @@ export class AppComponent implements OnInit {
 
     this.logState = 'active';
 
-    setTimeout(function() {
+    const secondsCounter = timer(300);
+
+    secondsCounter.subscribe( () => {
       this_.showData = true;
-    }, 300);
+    });
   }
 
   public odooConnect(server: string, db: string, user: string, pass: string): void {
