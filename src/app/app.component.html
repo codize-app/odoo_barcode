@@ -2,7 +2,7 @@
   <h1>{{title}}</h1>
 </div>
 <div class="odoo-input" [@logged]="logState">
-  <form #form (submit)="readOdooData($event)">
+  <form #form (submit)="logIn($event)">
     <mat-form-field class="mat-input">
       <mat-label>Server</mat-label>
       <input matInput type="text" name="server" value="" placeholder="your odoo server" required>

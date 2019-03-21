@@ -39,6 +39,7 @@ export class AppComponent implements OnInit {
   public db = '';
   public user = '';
   public pass = '';
+  public uid = 0;
   ////////////////////////////
   public logState = 'inactive';
   ////////////////////////////
@@ -89,7 +90,7 @@ export class AppComponent implements OnInit {
    );
   }
 
-  public readOdooData(e: any): void {
+  public logIn(e: any): void {
     e.preventDefault();
     console.log('Data Readed');
     console.log('Server: ', this.form.nativeElement.elements['server'].value);
@@ -104,12 +105,23 @@ export class AppComponent implements OnInit {
 
     ////////////////////////////////////////////////////////////////////////
 
-    const forcedUserValue = $.xmlrpc.force('string', this.user);
-    const forcedPasswordValue = $.xmlrpc.force('string', this.pass);
-    const forcedDbNameValue = $.xmlrpc.force('string', this.db);
-    const server_url = this.server + '/xmlrpc';
+    this.odooConnect(this.server, this.db, this.user, this.pass);
 
     const this_ = this;
+
+    this.logState = 'active';
+
+    setTimeout(function() {
+      this_.showData = true;
+    }, 300);
+  }
+
+  public odooConnect(server: string, db: string, user: string, pass: string): void {
+    const this_ = this;
+    const forcedUserValue = $.xmlrpc.force('string', user);
+    const forcedPasswordValue = $.xmlrpc.force('string', pass);
+    const forcedDbNameValue = $.xmlrpc.force('string', db);
+    const server_url = server + '/xmlrpc';
 
     $.xmlrpc({
       url: server_url + '/common',
@@ -118,24 +130,19 @@ export class AppComponent implements OnInit {
       crossDomain: true,
       params: [forcedDbNameValue, forcedUserValue, forcedPasswordValue],
       success: function(response: any, status: any, jqXHR: any) {
-        console.log(response + '-' + status);
+        console.log(response + ' - ' + status);
         if (response) {
           this_.inLoad = false;
+          this_.uid = response[0];
         } else {
           this_.logOut();
         }
       },
       error: function(jqXHR: any, status: any, error: any) {
-        console.log('Err: ' + jqXHR + '-' + status + '-' + error);
+        console.log('Err: ' + jqXHR + ' - ' + status + '-' + error);
         this_.logOut();
       }
     });
-
-    this.logState = 'active';
-
-    setTimeout(function() {
-      this_.showData = true;
-    }, 300);
   }
 
   public logOut(): void {
