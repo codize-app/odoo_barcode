@@ -131,7 +131,7 @@ export class AppComponent implements OnInit {
       params: [forcedDbNameValue, forcedUserValue, forcedPasswordValue],
       success: function(response: any, status: any, jqXHR: any) {
         console.log(response + ' - ' + status);
-        if (response) {
+        if (response[0] !== false) {
           this_.inLoad = false;
           this_.uid = response[0];
         } else {
