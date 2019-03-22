@@ -7,6 +7,11 @@ declare var navigator: any;
 declare var window: any;
 declare var cordova: any;
 
+export interface Product {
+  value: number;
+  viewValue: string;
+}
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -49,6 +54,8 @@ export class AppComponent implements OnInit {
   ////////////////////////////
   public barcode = '';
   public barcode_format = '';
+  ////////////////////////////
+  products: Product[] = [];
 
   constructor(private renderer: Renderer2) {}
 
@@ -133,7 +140,7 @@ export class AppComponent implements OnInit {
       success: function(response: any, status: any, jqXHR: any) {
         console.log(response + ' - ' + status);
         if (response[0] !== false) {
-          this_.inLoad = false;
+          this_.getProducts(this_.server + '/xmlrpc', this_.db, this_.user, this_.pass, response[0]);
           this_.uid = response[0];
         } else {
           this_.logOut();
@@ -142,6 +149,29 @@ export class AppComponent implements OnInit {
       error: function(jqXHR: any, status: any, error: any) {
         console.log('Err: ' + jqXHR + ' - ' + status + '-' + error);
         this_.logOut();
+      }
+    });
+  }
+
+  public getProducts(server_url: string, db: string, user: string, pass: string, uid: number): void {
+    const this_ = this;
+    const inParams = [];
+
+    $.xmlrpc({
+      url: server_url + '/2/object',
+      methodName: 'execute_kw',
+      crossDomain: true,
+      params: [db, uid, pass, 'product.template', 'search_read', inParams],
+      success: function(response: any, status: any, jqXHR: any) {
+        console.log(response);
+        for (let i = 0; i < response[0].length; i++) {
+          this_.products[i] = {value: response[0][i].id, viewValue: response[0][i].name};
+        }
+        console.log(this_.products);
+        this_.inLoad = false;
+      },
+      error: function(jqXHR: any, status: any, error: any) {
+        console.log('Error : ' + error );
       }
     });
   }

@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 /*NgMaterial*/
-import { MatInputModule, MatButtonModule, MatProgressSpinnerModule } from '@angular/material';
+import { MatInputModule, MatButtonModule, MatProgressSpinnerModule, MatSelectModule } from '@angular/material';
 
 /*MyComponents*/
 import { AppComponent } from './app.component';
@@ -17,7 +17,8 @@ import { AppComponent } from './app.component';
     BrowserAnimationsModule,
     MatInputModule,
     MatButtonModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatSelectModule
   ],
   providers: [],
   bootstrap: [AppComponent]
