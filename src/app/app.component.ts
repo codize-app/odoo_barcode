@@ -155,13 +155,12 @@ export class AppComponent implements OnInit {
 
   public getProducts(server_url: string, db: string, user: string, pass: string, uid: number): void {
     const this_ = this;
-    const inParams = [];
 
     $.xmlrpc({
       url: server_url + '/2/object',
       methodName: 'execute_kw',
       crossDomain: true,
-      params: [db, uid, pass, 'product.template', 'search_read', inParams],
+      params: [db, uid, pass, 'product.template', 'search_read', [ [] ], {'fields': ['name', 'id']}],
       success: function(response: any, status: any, jqXHR: any) {
         console.log(response);
         for (let i = 0; i < response[0].length; i++) {
