@@ -55,7 +55,8 @@ export class AppComponent implements OnInit {
   public barcode = '';
   public barcode_format = '';
   ////////////////////////////
-  products: Product[] = [];
+  public products: Product[] = [];
+  public selectedValue: number;
 
   constructor(private renderer: Renderer2) {}
 
@@ -104,7 +105,7 @@ export class AppComponent implements OnInit {
     console.log('User: ', this.form.nativeElement.elements['user'].value);
     console.log('Pass: ', this.form.nativeElement.elements['pass'].value);
 
-    this.server = this.form.nativeElement.elements['server'].value;
+    this.server = this.form.nativeElement.elements['server'].value + '/xmlrpc';
     this.db = this.form.nativeElement.elements['db'].value;
     this.user = this.form.nativeElement.elements['user'].value;
     this.pass = this.form.nativeElement.elements['pass'].value;
@@ -129,10 +130,9 @@ export class AppComponent implements OnInit {
     const forcedUserValue = $.xmlrpc.force('string', user);
     const forcedPasswordValue = $.xmlrpc.force('string', pass);
     const forcedDbNameValue = $.xmlrpc.force('string', db);
-    const server_url = server + '/xmlrpc';
 
     $.xmlrpc({
-      url: server_url + '/common',
+      url: this_.server + '/common',
       methodName: 'login',
       dataType: 'xmlrpc',
       crossDomain: true,
@@ -140,7 +140,7 @@ export class AppComponent implements OnInit {
       success: function(response: any, status: any, jqXHR: any) {
         console.log(response + ' - ' + status);
         if (response[0] !== false) {
-          this_.getProducts(this_.server + '/xmlrpc', this_.db, this_.user, this_.pass, response[0]);
+          this_.getProducts(this_.server, this_.db, this_.user, this_.pass, response[0]);
           this_.uid = response[0];
         } else {
           this_.logOut();
@@ -168,6 +168,23 @@ export class AppComponent implements OnInit {
         }
         console.log(this_.products);
         this_.inLoad = false;
+      },
+      error: function(jqXHR: any, status: any, error: any) {
+        console.log('Error : ' + error );
+      }
+    });
+  }
+
+  public writeBarcode(pid: number): void {
+    const this_ = this;
+
+    $.xmlrpc({
+      url: this_.server + '2/object',
+      methodName: 'execute_kw',
+      crossDomain: true,
+      params: [this_.db, this_.uid, this_.pass, 'product.template', 'write', [[pid], {'barcode': this_.barcode}]],
+      success: function(response: any, status: any, jqXHR: any) {
+        console.log(response);
       },
       error: function(jqXHR: any, status: any, error: any) {
         console.log('Error : ' + error );

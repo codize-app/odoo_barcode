@@ -43,17 +43,19 @@
       <hr>
       <p>BarCode N°: {{barcode}}</p>
       <p>BarCode Format: {{barcode_format}}</p>
-      <mat-form-field style="width:100%;">
-        <mat-label>Select Product</mat-label>
-        <mat-select>
-          <mat-option *ngFor="let product of products" [value]="product.value">
-            {{product.viewValue}}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
-      <div class="mat-button">
-        <button mat-raised-button color="warn">Sinc. with Odoo</button>
-      </div>
+      <form>
+        <mat-form-field style="width:100%;">
+          <mat-label>Select Product</mat-label>
+          <mat-select [(ngModel)]="selectedValue" [ngModelOptions]="{standalone: true}" name="product">
+            <mat-option *ngFor="let product of products" [value]="product.value">
+              {{product.viewValue}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <div class="mat-button">
+          <button mat-raised-button color="warn" (click)="writeBarcode(selectedValue)">Sinc. with Odoo</button>
+        </div>
+      </form>
     </div>
   </div>
 </div>
