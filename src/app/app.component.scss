@@ -21,11 +21,15 @@ h2{
   overflow: hidden;
   border-bottom: 1px solid #fff;
   font-size:14px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 h3{
   color: #fff;
   overflow: hidden;
   font-size:13px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 p{
   color: #fff;
