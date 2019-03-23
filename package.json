@@ -26,9 +26,11 @@
     "@angular/platform-browser": "^7.2.9",
     "@angular/platform-browser-dynamic": "^7.2.9",
     "@angular/router": "^7.2.9",
+    "bootstrap": "^4.3.1",
     "core-js": "^2.6.5",
     "jquery": "^3.3.1",
     "jquery-xmlrpc": "^0.4.4",
+    "popper.js": "^1.14.7",
     "rxjs": "^6.4.0",
     "stream": "0.0.2",
     "zone.js": "^0.8.29"

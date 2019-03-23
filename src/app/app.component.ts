@@ -26,10 +26,12 @@ export interface Product {
       })),
       transition('inactive => active', [
         animate(500, keyframes([
-          style({left: '50%', offset: 0}),
-          style({left: '55%', offset: 0.2}),
-          style({left: '55%', offset: 0.4}),
-          style({left: '-100%', offset: 1.0})
+          style({position: 'static', left: '0', offset: 0}),
+          style({position: 'absolute', left: '50%', offset: 0.01}),
+          style({position: 'absolute', left: '55%', offset: 0.2}),
+          style({position: 'absolute', left: '55%', offset: 0.4}),
+          style({position: 'absolute', left: '-100%', offset: 0.99}),
+          style({position: 'static', left: '0', offset: 1.0}),
         ]))
       ]),
       transition('active => inactive', animate('500ms ease-in-out'))
@@ -112,8 +114,6 @@ export class AppComponent implements OnInit {
 
     ////////////////////////////////////////////////////////////////////////
 
-    this.odooConnect(this.server, this.db, this.user, this.pass);
-
     const this_ = this;
 
     this.logState = 'active';
@@ -122,6 +122,7 @@ export class AppComponent implements OnInit {
 
     secondsCounter.subscribe( () => {
       this_.showData = true;
+      this.odooConnect(this.server, this.db, this.user, this.pass);
     });
   }
 
@@ -193,7 +194,6 @@ export class AppComponent implements OnInit {
   }
 
   public logOut(): void {
-    this.form.nativeElement.reset();
     this.showData = false;
     this.inLoad = true;
     this.logState = 'inactive';

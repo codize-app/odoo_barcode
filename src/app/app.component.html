@@ -1,66 +1,80 @@
-<div class="odoo-app">
-  <h1>{{title}}</h1>
-</div>
-<div class="odoo-input" [@logged]="logState">
-  <form #form (submit)="logIn($event)">
-    <mat-form-field class="mat-input">
-      <mat-label>Server</mat-label>
-      <input matInput type="text" name="server" value="" placeholder="your odoo server" required>
-    </mat-form-field>
-    <mat-form-field class="mat-input">
-      <mat-label>Database</mat-label>
-      <input matInput type="text" name="db" value="" placeholder="your db" required>
-    </mat-form-field>
-    <mat-form-field class="mat-input">
-      <mat-label>User</mat-label>
-      <input matInput type="text" name="user" value="" placeholder="your admin user" required>
-    </mat-form-field>
-    <mat-form-field class="mat-input">
-      <mat-label>Password</mat-label>
-      <input matInput type="password" name="pass" value="" placeholder="your admin password" required>
-    </mat-form-field>
-    <div class="mat-button">
-      <button mat-raised-button color="primary">Log in</button>
+<div class="container odoo-app mt8">
+  <div class="row">
+    <div class="col-12 text-center">
+        <img src="assets/img/odoo_logo.png" class="img-fluid" class="logo" />
+        <h1 class="text-right">{{title}}</h1>
     </div>
-  </form>
+  </div>
 </div>
 
-<div class="odoo-logged odoo-input" *ngIf="showData">
-  <div class="loading" *ngIf="inLoad">
-    <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
+<div class="container odoo-input" *ngIf="!showData" [@logged]="logState">
+  <div class="row">
+    <div class="col-12">
+        <form #form (submit)="logIn($event)">
+            <mat-form-field class="mat-input">
+              <mat-label>Server</mat-label>
+              <input matInput type="text" name="server" value="" placeholder="your odoo server" required>
+            </mat-form-field>
+            <mat-form-field class="mat-input">
+              <mat-label>Database</mat-label>
+              <input matInput type="text" name="db" value="" placeholder="your db" required>
+            </mat-form-field>
+            <mat-form-field class="mat-input">
+              <mat-label>User</mat-label>
+              <input matInput type="text" name="user" value="" placeholder="your admin user" required>
+            </mat-form-field>
+            <mat-form-field class="mat-input">
+              <mat-label>Password</mat-label>
+              <input matInput type="password" name="pass" value="" placeholder="your admin password" required>
+            </mat-form-field>
+            <div class="mat-button">
+              <button mat-raised-button color="primary">Log in</button>
+            </div>
+        </form>
+    </div>
   </div>
-  <div class="odoo-content-data" *ngIf="!inLoad">
-    <h2>{{server}}</h2>
-    <h3>User: {{user}}</h3>
-    <div class="mat-button">
-      <button mat-raised-button color="primary" (click)="logOut()">Log Out</button>
-    </div>
-    <hr>
-    <div class="mat-button">
-      <button mat-raised-button color="accent" (touchend)="startScann()">Scan Barcode</button>
-    </div>
-    <div *ngIf="barcode != ''">
-      <hr>
-      <p>BarCode N°: {{barcode}}</p>
-      <p>BarCode Format: {{barcode_format}}</p>
-      <form>
-        <mat-form-field style="width:100%;">
-          <mat-label>Select Product</mat-label>
-          <mat-select [(ngModel)]="selectedValue" [ngModelOptions]="{standalone: true}" name="product">
-            <mat-option *ngFor="let product of products" [value]="product.value">
-              {{product.viewValue}}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
-        <div class="mat-button">
-          <button mat-raised-button color="warn" (click)="writeBarcode(selectedValue)">Sinc. with Odoo</button>
+</div>
+
+<div class="container odoo-logged odoo-input" *ngIf="showData">
+  <div class="row">
+    <div class="col-12">
+      <div class="loading" *ngIf="inLoad">
+          <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
         </div>
-      </form>
+        <div class="odoo-content-data" *ngIf="!inLoad">
+          <h2>{{server}}</h2>
+          <h3>User: {{user}}</h3>
+          <div class="mat-button">
+            <button mat-raised-button color="primary" (click)="logOut()">Log Out</button>
+          </div>
+          <hr>
+          <div class="mat-button">
+            <button mat-raised-button color="accent" (touchend)="startScann()">Scan Barcode</button>
+          </div>
+          <div *ngIf="barcode != ''">
+            <hr>
+            <p>BarCode N°: {{barcode}}</p>
+            <p>BarCode Format: {{barcode_format}}</p>
+            <form>
+              <mat-form-field style="width:100%;">
+                <mat-label>Select Product</mat-label>
+                <mat-select [(ngModel)]="selectedValue" [ngModelOptions]="{standalone: true}" name="product">
+                  <mat-option *ngFor="let product of products" [value]="product.value">
+                    {{product.viewValue}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+              <div class="mat-button">
+                <button mat-raised-button color="warn" (click)="writeBarcode(selectedValue)">Sinc. with Odoo</button>
+              </div>
+            </form>
+          </div>
+        </div>
     </div>
   </div>
 </div>
 
-<footer>
+<footer class="text-center">
   <span class="pcp">
         <span>&#112;&#111;&#119;&#101;&#114;&#101;&#100;
           &#032;&#098;&#121;
