@@ -179,10 +179,10 @@ export class AppComponent implements OnInit {
     const this_ = this;
 
     $.xmlrpc({
-      url: this_.server + '2/object',
+      url: this_.server + '/2/object',
       methodName: 'execute_kw',
       crossDomain: true,
-      params: [this_.db, this_.uid, this_.pass, 'product.template', 'write', [[pid], {'barcode': this_.barcode}]],
+      params: [this_.db, this_.uid, this_.pass, 'product.template', 'write', [[pid], {'barcode': '555'}]],
       success: function(response: any, status: any, jqXHR: any) {
         console.log(response);
       },
