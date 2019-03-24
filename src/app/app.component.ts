@@ -178,6 +178,7 @@ export class AppComponent implements OnInit {
 
   public writeBarcode(pid: number): void {
     const this_ = this;
+    this.inLoad = true;
 
     $.xmlrpc({
       url: this_.server + '/2/object',
@@ -186,9 +187,15 @@ export class AppComponent implements OnInit {
       params: [this_.db, this_.uid, this_.pass, 'product.template', 'write', [[pid], {'barcode': this_.barcode}]],
       success: function(response: any, status: any, jqXHR: any) {
         console.log(response);
+        if (response[0] === true) {
+          this_.inLoad = false;
+        } else {
+          this_.inLoad = false;
+        }
       },
       error: function(jqXHR: any, status: any, error: any) {
         console.log('Error : ' + error );
+        this_.inLoad = false;
       }
     });
   }
