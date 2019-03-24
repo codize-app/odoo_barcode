@@ -19,6 +19,14 @@
     <platform name="android">
         <allow-intent href="market:*" />
         <icon src="logo.png" />
+	<splash src="splash.png" density="land-hdpi"/>
+    	<splash src="splash.png" density="land-ldpi"/>
+    	<splash src="splash.png" density="land-mdpi"/>
+    	<splash src="splash.png" density="land-xhdpi"/>
+    	<splash src="splash.png" density="port-hdpi"/>
+    	<splash src="splash.png" density="port-ldpi"/>
+    	<splash src="splash.png" density="port-mdpi"/>
+    	<splash src="splash.png" density="port-xhdpi"/>
     </platform>
     <platform name="ios">
         <allow-intent href="itms:*" />
@@ -28,5 +36,5 @@
         <variable name="ANDROID_SUPPORT_V4_VERSION" value="27.+" />
     </plugin>
     <preference name="Orientation" value="portrait" />
-    <engine name="android" spec="~7.1.4" />
+    <engine name="android" spec="^7.1.4" />
 </widget>
