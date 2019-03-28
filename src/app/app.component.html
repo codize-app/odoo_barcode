@@ -13,19 +13,19 @@
         <form #form (submit)="logIn($event)">
             <mat-form-field class="mat-input">
               <mat-label>Server</mat-label>
-              <input matInput type="text" name="server" value="" placeholder="your odoo server" required>
+              <input matInput type="text" name="server" [value]="odoo_url_value" placeholder="your odoo server" required>
             </mat-form-field>
             <mat-form-field class="mat-input">
               <mat-label>Database</mat-label>
-              <input matInput type="text" name="db" value="" placeholder="your db" required>
+              <input matInput type="text" name="db" [value]="odoo_db_value" placeholder="your db" required>
             </mat-form-field>
             <mat-form-field class="mat-input">
               <mat-label>User</mat-label>
-              <input matInput type="text" name="user" value="" placeholder="your admin user" required>
+              <input matInput type="text" name="user" [value]="odoo_user_value" placeholder="your admin user" required>
             </mat-form-field>
             <mat-form-field class="mat-input">
               <mat-label>Password</mat-label>
-              <input matInput type="password" name="pass" value="" placeholder="your admin password" required>
+              <input matInput type="password" name="pass" [value]="odoo_pass_value" placeholder="your admin password" required>
             </mat-form-field>
             <div class="mat-button">
               <button mat-raised-button color="primary">Log in</button>

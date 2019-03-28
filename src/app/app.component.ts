@@ -49,6 +49,11 @@ export class AppComponent implements OnInit {
   public pass = '';
   public uid = 0;
   ////////////////////////////
+  public odoo_url_value = '';
+  public odoo_db_value = '';
+  public odoo_user_value = '';
+  public odoo_pass_value = '';
+  ////////////////////////////
   public logState = 'inactive';
   ////////////////////////////
   public showData = false;
@@ -66,6 +71,15 @@ export class AppComponent implements OnInit {
     this.renderer.listen('document', 'deviceready', () => {
       console.log('Device is Ready');
     });
+
+    this.logData();
+  }
+
+  public logData(): void {
+    this.odoo_url_value = window.localStorage.getItem('url');
+    this.odoo_db_value = window.localStorage.getItem('db');
+    this.odoo_user_value = window.localStorage.getItem('user');
+    this.odoo_pass_value = window.localStorage.getItem('pass');
   }
 
   public startScann(): void {
@@ -111,6 +125,11 @@ export class AppComponent implements OnInit {
     this.db = this.form.nativeElement.elements['db'].value;
     this.user = this.form.nativeElement.elements['user'].value;
     this.pass = this.form.nativeElement.elements['pass'].value;
+
+    window.localStorage.setItem('url', this.form.nativeElement.elements['server'].value);
+    window.localStorage.setItem('db', this.form.nativeElement.elements['db'].value);
+    window.localStorage.setItem('user', this.form.nativeElement.elements['user'].value);
+    window.localStorage.setItem('pass', this.form.nativeElement.elements['pass'].value);
 
     ////////////////////////////////////////////////////////////////////////
 
