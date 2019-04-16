@@ -69,3 +69,8 @@ input.mat-input-element {
   align-items: center;
   justify-content: space-around;
 }
+.barcode {
+  overflow: hidden;
+  white-space: nowrap; 
+  text-overflow: ellipsis;
+}
