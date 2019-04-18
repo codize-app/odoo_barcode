@@ -113,6 +113,10 @@ export class AppComponent implements OnInit {
    );
   }
 
+  public getPrice(): void {
+    const this_ = this;
+  }
+
   public logIn(e: any): void {
     e.preventDefault();
     console.log('Data Readed');
