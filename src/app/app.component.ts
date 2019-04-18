@@ -10,6 +10,7 @@ declare var cordova: any;
 export interface Product {
   value: number;
   viewValue: string;
+  price: number;
 }
 
 @Component({
@@ -184,11 +185,11 @@ export class AppComponent implements OnInit {
       url: server_url + '/2/object',
       methodName: 'execute_kw',
       crossDomain: true,
-      params: [db, uid, pass, 'product.template', 'search_read', [ [] ], {'fields': ['name', 'id']}],
+      params: [db, uid, pass, 'product.template', 'search_read', [ [] ], {'fields': ['name', 'id', 'list_price']}],
       success: function(response: any, status: any, jqXHR: any) {
         console.log(response);
         for (let i = 0; i < response[0].length; i++) {
-          this_.products[i] = {value: response[0][i].id, viewValue: response[0][i].name};
+          this_.products[i] = {value: response[0][i].id, viewValue: response[0][i].name, price: response[0][i].list_price};
         }
         console.log(this_.products);
         this_.inLoad = false;
