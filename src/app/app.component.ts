@@ -57,7 +57,7 @@ export class AppComponent implements OnInit {
   public showData = false;
   public inLoad = true;
   ////////////////////////////
-  public barcode = '1';
+  public barcode = '';
   public barcode_format = '';
   ////////////////////////////
   public products: Product[] = [];
