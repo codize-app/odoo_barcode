@@ -1,4 +1,4 @@
-import { Component, OnInit, OnChanges, Input } from '@angular/core';
+import { Component, OnInit, OnChanges, Input, Output, EventEmitter } from '@angular/core';
 import { timer } from 'rxjs';
 
 import { Product } from '../product';
@@ -30,6 +30,7 @@ export class ScannerComponent implements OnInit, OnChanges {
   @Input('inLoad') inLoad = true;
   // tslint:disable-next-line: no-input-rename
   @Input('logged') logged = false;
+  @Output() log = new EventEmitter();
   ////////////////////////////
   public barcode = '';
   public barcode_format = '';
@@ -98,7 +99,7 @@ export class ScannerComponent implements OnInit, OnChanges {
    );
   }
 
-  /**/
+  /* Get Products Information */
   public getProducts(server_url: string, db: string, user: string, pass: string, uid: number): void {
     const this_ = this;
 
@@ -156,6 +157,10 @@ export class ScannerComponent implements OnInit, OnChanges {
         this_.inLoad = false;
       }
     });
+  }
+
+  public logOut(): void {
+    this.log.emit();
   }
 
 }

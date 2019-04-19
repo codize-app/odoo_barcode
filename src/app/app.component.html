@@ -36,7 +36,7 @@
 </div>
 
 <div class="container odoo-logged odoo-input" *ngIf="showData">
-  <app-scanner [server]="server" [db]="db" [user]="user" [pass]="pass" [uid]="uid" [inLoad]="inLoad" [logged]="logged"></app-scanner>
+  <app-scanner [server]="server" [db]="db" [user]="user" [pass]="pass" [uid]="uid" [inLoad]="inLoad" [logged]="logged" (log)="logOut()"></app-scanner>
 </div>
 
 <footer class="text-center">
