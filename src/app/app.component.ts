@@ -1,18 +1,14 @@
 import { Component, ViewChild, ElementRef, OnInit, Renderer2 } from '@angular/core';
 import { trigger, state, style, animate, transition, keyframes } from '@angular/animations';
 import { timer } from 'rxjs';
+
+import { Product } from './product';
+
 declare var jquery: any;
 declare var $: any;
 declare var navigator: any;
 declare var window: any;
 declare var cordova: any;
-
-export interface Product {
-  value: number;
-  viewValue: string;
-  barcode: string;
-  price: number;
-}
 
 @Component({
   selector: 'app-root',
