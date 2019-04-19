@@ -50,7 +50,7 @@
           <hr>
           <div class="mat-button">
             <button mat-raised-button color="accent" (touchend)="startScann()">Load Barcode</button>
-            <button mat-raised-button color="accent" (touchend)="getPrice()">Get Price</button>
+            <button mat-raised-button color="accent" (click)="getPrice()">Get Price</button>
           </div>
           <div *ngIf="barcode != ''">
             <hr>

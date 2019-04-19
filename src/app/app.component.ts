@@ -10,6 +10,7 @@ declare var cordova: any;
 export interface Product {
   value: number;
   viewValue: string;
+  barcode: string;
   price: number;
 }
 
@@ -60,7 +61,7 @@ export class AppComponent implements OnInit {
   public showData = false;
   public inLoad = true;
   ////////////////////////////
-  public barcode = '';
+  public barcode = '1';
   public barcode_format = '';
   ////////////////////////////
   public products: Product[] = [];
@@ -112,10 +113,6 @@ export class AppComponent implements OnInit {
         disableSuccessBeep: false // iOS and Android
       }
    );
-  }
-
-  public getPrice(): void {
-    const this_ = this;
   }
 
   public logIn(e: any): void {
@@ -185,11 +182,12 @@ export class AppComponent implements OnInit {
       url: server_url + '/2/object',
       methodName: 'execute_kw',
       crossDomain: true,
-      params: [db, uid, pass, 'product.template', 'search_read', [ [] ], {'fields': ['name', 'id', 'list_price']}],
+      params: [db, uid, pass, 'product.template', 'search_read', [ [] ], {'fields': ['name', 'id', 'barcode', 'list_price']}],
       success: function(response: any, status: any, jqXHR: any) {
         console.log(response);
         for (let i = 0; i < response[0].length; i++) {
-          this_.products[i] = {value: response[0][i].id, viewValue: response[0][i].name, price: response[0][i].list_price};
+          this_.products[i] = {value: response[0][i].id, viewValue: response[0][i].name, barcode: response[0][i].barcode,
+          price: response[0][i].list_price};
         }
         console.log(this_.products);
         this_.inLoad = false;
@@ -198,6 +196,14 @@ export class AppComponent implements OnInit {
         console.log('Error : ' + error );
       }
     });
+  }
+
+  public getPrice(): void {
+    for (let i = 0; i < this.products.length; i++) {
+      if (this.barcode === this.products[i].barcode) {
+        alert(this.products[i].viewValue + ': ' + this.products[i].price);
+      }
+    }
   }
 
   public writeBarcode(pid: number): void {
