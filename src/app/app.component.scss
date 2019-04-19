@@ -9,25 +9,6 @@ h1{
   font-size: 15px;
   width:100%;
 }
-h2{
-  color: #fff;
-  overflow: hidden;
-  border-bottom: 1px solid #fff;
-  font-size:14px;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-}
-h3{
-  color: #fff;
-  overflow: hidden;
-  font-size:13px;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-}
-p{
-  color: #fff;
-  font-size:12px;
-}
 hr{
   border: 0;
   height: 1px;
@@ -61,17 +42,4 @@ input.mat-input-element {
 .mat-button button{
   width:100%;
   margin:0 10px;
-}
-
-/*Odoo Logged*/
-.loading{
-  display: flex;
-  align-content: center;
-  align-items: center;
-  justify-content: space-around;
-}
-.barcode {
-  overflow: hidden;
-  white-space: nowrap; 
-  text-overflow: ellipsis;
 }

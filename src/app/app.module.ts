@@ -8,10 +8,12 @@ import { MatInputModule, MatButtonModule, MatProgressSpinnerModule, MatSelectMod
 
 /*MyComponents*/
 import { AppComponent } from './app.component';
+import { ScannerComponent } from './scanner/scanner.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    ScannerComponent
   ],
   imports: [
     BrowserModule,

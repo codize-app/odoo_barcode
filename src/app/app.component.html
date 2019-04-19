@@ -36,51 +36,7 @@
 </div>
 
 <div class="container odoo-logged odoo-input" *ngIf="showData">
-  <div class="row">
-    <div class="col-12">
-      <div class="loading" *ngIf="inLoad">
-          <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
-        </div>
-        <div class="odoo-content-data" *ngIf="!inLoad">
-          <h2>{{server}}</h2>
-          <h3>User: {{user}}</h3>
-          <div class="mat-button">
-            <button mat-raised-button color="primary" (click)="logOut()">Log Out</button>
-          </div>
-          <hr>
-          <div class="mat-button">
-            <button mat-raised-button color="accent" (click)="startScann(0)">Load Barcode</button>
-            <button mat-raised-button color="accent" (click)="startScann(1)">Get Price</button>
-          </div>
-
-          <div *ngIf="showScann">
-            <hr>
-            <p class="barcode">BarCode N°: {{barcode}}</p>
-            <p>BarCode Format: {{barcode_format}}</p>
-            <form>
-              <mat-form-field style="width:100%;">
-                <mat-label>Select Product</mat-label>
-                <mat-select [(ngModel)]="selectedValue" [ngModelOptions]="{standalone: true}" name="product">
-                  <mat-option *ngFor="let product of products" [value]="product.value">
-                    {{product.viewValue}}
-                  </mat-option>
-                </mat-select>
-              </mat-form-field>
-              <div class="mat-button">
-                <button mat-raised-button color="warn" (click)="writeBarcode(selectedValue)">Sinc. with Odoo</button>
-              </div>
-            </form>
-          </div>
-
-          <div *ngIf="showPPrice">
-            <p class="barcode">BarCode N°: {{barcode}}</p>
-            <p>{{p_scanned}}</p>
-            <p>{{pr_scanned}}</p>
-          </div>
-
-        </div>
-    </div>
-  </div>
+  <app-scanner [server]="server" [db]="db" [user]="user" [pass]="pass" [uid]="uid" [inLoad]="inLoad" [logged]="logged"></app-scanner>
 </div>
 
 <footer class="text-center">
