@@ -59,6 +59,11 @@ export class AppComponent implements OnInit {
   ////////////////////////////
   public barcode = '';
   public barcode_format = '';
+  public p_scanned = '';
+  public pr_scanned = '';
+  public showScann = false;
+  public showPPrice = false;
+  public showErr = false;
   ////////////////////////////
   public products: Product[] = [];
   public selectedValue: number;
@@ -80,10 +85,15 @@ export class AppComponent implements OnInit {
     this.odoo_pass_value = window.localStorage.getItem('pass');
   }
 
-  public startScann(): void {
+  public startScann(m: number): void {  // m: number = mode | 0 for Scann Barcode, 1 for get price
     const this_ = this;
     this.barcode = '';
     this.barcode_format = '';
+    this.p_scanned = '';
+    this.pr_scanned = '';
+    this.showScann = false;
+    this.showPPrice = false;
+    this.showErr = false;
 
     cordova.plugins.barcodeScanner.scan(
       function (result: any) {
@@ -93,6 +103,16 @@ export class AppComponent implements OnInit {
                     'Result: ' + result.text + '\n' +
                     'Format: ' + result.format + '\n' +
                     'Cancelled: ' + result.cancelled);
+        switch (m) {
+          case 0:
+            this_.showScann = true;
+            break;
+          case 1:
+            this_.getPrice();
+            break;
+          default:
+            this_.showScann = true;
+        }
       },
       function (error: any) {
         console.log('Scanning failed: ' + error);
@@ -197,7 +217,9 @@ export class AppComponent implements OnInit {
   public getPrice(): void {
     for (let i = 0; i < this.products.length; i++) {
       if (this.barcode === this.products[i].barcode) {
-        alert(this.products[i].viewValue + ': ' + this.products[i].price);
+        this.p_scanned = this.products[i].viewValue;
+        this.pr_scanned = String(this.products[i].price);
+        this.showPPrice = true;
       }
     }
   }

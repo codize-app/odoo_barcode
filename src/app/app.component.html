@@ -49,10 +49,11 @@
           </div>
           <hr>
           <div class="mat-button">
-            <button mat-raised-button color="accent" (touchend)="startScann()">Load Barcode</button>
-            <button mat-raised-button color="accent" (click)="getPrice()">Get Price</button>
+            <button mat-raised-button color="accent" (click)="startScann(0)">Load Barcode</button>
+            <button mat-raised-button color="accent" (click)="startScann(1)">Get Price</button>
           </div>
-          <div *ngIf="barcode != ''">
+
+          <div *ngIf="showScann">
             <hr>
             <p class="barcode">BarCode N°: {{barcode}}</p>
             <p>BarCode Format: {{barcode_format}}</p>
@@ -70,6 +71,13 @@
               </div>
             </form>
           </div>
+
+          <div *ngIf="showPPrice">
+            <p class="barcode">BarCode N°: {{barcode}}</p>
+            <p>{{p_scanned}}</p>
+            <p>{{pr_scanned}}</p>
+          </div>
+
         </div>
     </div>
   </div>
