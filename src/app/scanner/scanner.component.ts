@@ -42,6 +42,18 @@ export class ScannerComponent implements OnInit, OnChanges {
   ////////////////////////////
   public products: Product[] = [];
   public selectedValue: number;
+  ////////////////////////////
+  public scanConfig = {
+    preferFrontCamera : false,    // iOS and Android
+    showFlipCameraButton : false, // iOS and Android
+    showTorchButton : true,       // iOS and Android
+    torchOn: false,               // Android, launch with the torch switched on (if available)
+    prompt : 'Place a barcode inside the scan area', // Android
+    resultDisplayDuration: 0,     // Time of show
+    orientation : 'portrait',     // Android only (portrait|landscape), default unset so it rotates with the device
+    disableAnimations : true,     // iOS
+    disableSuccessBeep: false     // iOS and Android
+  };
 
   constructor() { }
 
@@ -71,6 +83,7 @@ export class ScannerComponent implements OnInit, OnChanges {
                     'Result: ' + result.text + '\n' +
                     'Format: ' + result.format + '\n' +
                     'Cancelled: ' + result.cancelled);
+
         switch (m) {
           case 0:
             this_.showScann = true;
@@ -85,17 +98,7 @@ export class ScannerComponent implements OnInit, OnChanges {
       function (error: any) {
         console.log('Scanning failed: ' + error);
       },
-      {
-        preferFrontCamera : false, // iOS and Android
-        showFlipCameraButton : false, // iOS and Android
-        showTorchButton : true, // iOS and Android
-        torchOn: false, // Android, launch with the torch switched on (if available)
-        prompt : 'Place a barcode inside the scan area', // Android
-        resultDisplayDuration: 0, // Time of show
-        orientation : 'portrait', // Android only (portrait|landscape), default unset so it rotates with the device
-        disableAnimations : true, // iOS
-        disableSuccessBeep: false // iOS and Android
-      }
+      this_.scanConfig
    );
   }
 
