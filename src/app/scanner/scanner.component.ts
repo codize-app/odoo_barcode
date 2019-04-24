@@ -32,7 +32,7 @@ export class ScannerComponent implements OnInit, OnChanges {
   @Input('logged') logged = false;
   @Output() log = new EventEmitter();
   ////////////////////////////
-  public barcode = '9781401309664';
+  public barcode = '';
   public barcode_format = '';
   public p_scanned = '';
   public pr_scanned = '';
