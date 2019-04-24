@@ -1,5 +1,4 @@
 import { Component, OnInit, OnChanges, Input, Output, EventEmitter } from '@angular/core';
-import { timer } from 'rxjs';
 
 import { Product } from '../product';
 
@@ -57,14 +56,21 @@ export class ScannerComponent implements OnInit, OnChanges {
 
   constructor() { }
 
-  ngOnInit() {}
+  // Lifehooks funs
 
-  ngOnChanges() {
+  public ngOnInit(): void {}
+
+  public ngOnChanges(): void {
     if (this.logged) {
       this.getProducts(this.server, this.db, this.user, this.pass, this.uid);
     }
   }
 
+  // END - Lifehooks funs
+
+  // Internal use funs
+
+  /* Scann Barcode Function */
   public startScann(m: number): void {  // m: number = mode | 0 for Scann Barcode, 1 for get price
     const this_ = this;
     this.barcode = '';
@@ -162,6 +168,9 @@ export class ScannerComponent implements OnInit, OnChanges {
     });
   }
 
+  // END - Internal use funs
+
+  /* LogOut emiter */
   public logOut(): void {
     this.log.emit();
   }
