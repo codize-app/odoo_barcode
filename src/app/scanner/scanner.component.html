@@ -4,15 +4,15 @@
         <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
       </div>
       <div class="odoo-content-data" *ngIf="!inLoad">
-        <h2>{{server}}</h2>
-        <h3>User: {{user}}</h3>
+        <p class="server">{{server}}</p>
+        <p class="user">User: {{user}}</p>
         <div class="mat-button">
           <button mat-raised-button color="primary" (click)="logOut()">Log Out</button>
         </div>
         <hr>
         <div class="mat-button">
           <button mat-raised-button color="accent" (click)="startScann(0)">Load Barcode</button>
-          <button mat-raised-button color="accent" (click)="startScann(1)">Get Price</button>
+          <button mat-raised-button color="accent" (click)="getPrice()">Get Price</button>
         </div>
 
         <div *ngIf="showScann">
@@ -34,10 +34,10 @@
           </form>
         </div>
 
-        <div *ngIf="showPPrice">
-          <p class="barcode">BarCode N°: {{barcode}}</p>
-          <p>{{p_scanned}}</p>
-          <p>{{pr_scanned}}</p>
+        <div *ngIf="showPPrice" class="text-center con-price">
+          <h6 class="barcode">BarCode N°: {{barcode}}</h6>
+          <h5>{{p_scanned}}</h5>
+          <h3>{{pr_scanned}}</h3>
         </div>
 
       </div>

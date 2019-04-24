@@ -1,17 +1,19 @@
-h2{
+.server{
     color: #fff;
     overflow: hidden;
     border-bottom: 1px solid #fff;
     font-size:14px;
     white-space: nowrap;
     text-overflow: ellipsis;
+    margin-bottom:5px;
 }
-h3{
+.user{
     color: #fff;
     overflow: hidden;
     font-size:13px;
     white-space: nowrap;
     text-overflow: ellipsis;
+    margin-bottom:5px;
 }
 p{
     color: #fff;
@@ -43,4 +45,10 @@ hr{
     align-content: center;
     align-items: center;
     justify-content: space-around;
+}
+.con-price {
+    margin-top:32px;
+}
+.con-price h6, .con-price h5, .con-price h3 {
+    color: #fff;
 }

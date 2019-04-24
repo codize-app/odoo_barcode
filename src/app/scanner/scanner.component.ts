@@ -32,7 +32,7 @@ export class ScannerComponent implements OnInit, OnChanges {
   @Input('logged') logged = false;
   @Output() log = new EventEmitter();
   ////////////////////////////
-  public barcode = '';
+  public barcode = '9781401309664';
   public barcode_format = '';
   public p_scanned = '';
   public pr_scanned = '';
@@ -131,7 +131,7 @@ export class ScannerComponent implements OnInit, OnChanges {
     for (let i = 0; i < this.products.length; i++) {
       if (this.barcode === this.products[i].barcode) {
         this.p_scanned = this.products[i].viewValue;
-        this.pr_scanned = String(this.products[i].price);
+        this.pr_scanned = '$ ' + String(this.products[i].price.toFixed(2));
         this.showPPrice = true;
       }
     }
