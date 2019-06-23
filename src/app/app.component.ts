@@ -38,7 +38,7 @@ declare var cordova: any;
 export class AppComponent implements OnInit {
   public title = 'barcode';
   ////////////////////////////
-  @ViewChild('form') form: ElementRef;
+  @ViewChild('form', {static: true}) form: ElementRef;
   public server = '';
   public db = '';
   public user = '';
