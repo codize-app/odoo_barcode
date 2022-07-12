@@ -14,11 +14,24 @@
   <link rel="icon" type="image/x-icon" href="favicon.ico">
   <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+  <script>
+    window.addEventListener = function () {
+      EventTarget.prototype.addEventListener.apply(this, arguments);
+    };
+    window.removeEventListener = function () {
+      EventTarget.prototype.removeEventListener.apply(this, arguments);
+    };
+    document.addEventListener = function () {
+      EventTarget.prototype.addEventListener.apply(this, arguments);
+    };
+    document.removeEventListener = function () {
+      EventTarget.prototype.removeEventListener.apply(this, arguments);
+    };
+  </script>
 </head>
 
 <body>
-  <script type="text/javascript" src="cordova.js"></script>
-  <app-root>
-  </app-root>
+  <app-root></app-root>
 </body>
 </html>

@@ -1,0 +1,25 @@
+<div class="row">
+    <div class="col-12">
+        <form #form (submit)="logIn($event)">
+            <mat-form-field class="w-100">
+                <mat-label>Server</mat-label>
+                <input matInput type="text" name="server" [(ngModel)]="globals.URL" placeholder="your odoo server" required>
+            </mat-form-field>
+            <mat-form-field class="w-100">
+                <mat-label>Database</mat-label>
+                <input matInput type="text" name="db" [(ngModel)]="globals.DB" placeholder="your db" required>
+            </mat-form-field>
+            <mat-form-field class="w-100">
+                <mat-label>User</mat-label>
+                <input matInput type="text" name="user" [(ngModel)]="globals.USER" placeholder="your admin user" required>
+            </mat-form-field>
+            <mat-form-field class="w-100">
+                <mat-label>Password</mat-label>
+                <input matInput type="password" name="pass" [(ngModel)]="globals.PASS" placeholder="your admin password" required>
+            </mat-form-field>
+            <div class="w-100">
+                <button class="w-100" mat-raised-button color="primary">Log in</button>
+            </div>
+        </form>
+    </div>
+</div>

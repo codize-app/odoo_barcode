@@ -9,7 +9,8 @@
     "declaration": false,
     "moduleResolution": "node",
     "experimentalDecorators": true,
-    "target": "es2015",
+    "target": "es2020",
+    "skipLibCheck": true,
     "typeRoots": [
       "node_modules/@types"
     ],
@@ -17,5 +18,11 @@
       "es2017",
       "dom"
     ]
-  }
+  },
+  "angularCompilerOptions": {
+    "strictInjectionParameters": true,
+    "strictInputAccessModifiers": true,
+    "strictTemplates": true,
+    "esModuleInterop": true
+  }  
 }

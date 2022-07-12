@@ -116,5 +116,7 @@
       }
     }
   },
-  "defaultProject": "odoo-barcode"
+  "cli": {
+    "analytics": "7fe4817d-1213-43b1-90b8-ffddee61e99e"
+  }
 }

@@ -1,6 +1,7 @@
 export interface Product {
-    value: number;
-    viewValue: string;
+    name: string;
+    image: string | boolean;
     barcode: string;
-    price: number;
+    lst_price: number;
+    currency?: string;
 }

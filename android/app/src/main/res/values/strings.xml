@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">odoo-barcode</string>
+    <string name="title_activity_main">odoo-barcode</string>
+    <string name="package_name">ar.codize.odoo_barcode</string>
+    <string name="custom_url_scheme">ar.codize.odoo_barcode</string>
+</resources>

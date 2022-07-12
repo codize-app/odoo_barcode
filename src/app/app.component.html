@@ -7,43 +7,12 @@
   </div>
 </div>
 
-<div class="container odoo-input" *ngIf="!showData" [@logged]="logState">
-  <div class="row">
-    <div class="col-12">
-        <form #form (submit)="logIn($event)">
-            <mat-form-field class="mat-input">
-              <mat-label>Server</mat-label>
-              <input matInput type="text" name="server" [value]="odoo_url_value" placeholder="your odoo server" required>
-            </mat-form-field>
-            <mat-form-field class="mat-input">
-              <mat-label>Database</mat-label>
-              <input matInput type="text" name="db" [value]="odoo_db_value" placeholder="your db" required>
-            </mat-form-field>
-            <mat-form-field class="mat-input">
-              <mat-label>User</mat-label>
-              <input matInput type="text" name="user" [value]="odoo_user_value" placeholder="your admin user" required>
-            </mat-form-field>
-            <mat-form-field class="mat-input">
-              <mat-label>Password</mat-label>
-              <input matInput type="password" name="pass" [value]="odoo_pass_value" placeholder="your admin password" required>
-            </mat-form-field>
-            <div class="mat-button">
-              <button mat-raised-button color="primary">Log in</button>
-            </div>
-        </form>
-    </div>
-  </div>
-</div>
-
-<div class="container odoo-logged odoo-input" *ngIf="showData">
-  <app-scanner [server]="server" [db]="db" [user]="user" [pass]="pass" [uid]="uid" [inLoad]="inLoad" [logged]="logged" (log)="logOut()"></app-scanner>
+<div class="container odoo-input">
+  <router-outlet></router-outlet>
 </div>
 
 <footer class="text-center">
   <span class="pcp">
-        <span>&#112;&#111;&#119;&#101;&#114;&#101;&#100;
-          &#032;&#098;&#121;
-          &#032;&#077;&#111;&#108;&#100;&#101;&#111;
-          &#032;&#073;&#110;&#116;&#101;&#114;&#097;&#099;&#116;&#105;&#118;&#101;</span>
+        <span>powered by Codize</span>
   </span>
 </footer>
