@@ -15,7 +15,10 @@ import { Globals } from '../app.const';
 export class ScannerComponent implements OnInit {
   loading = true;
   loading_product = false;
+  loading_product_odoo = false;
   product: Product;
+  products = [];
+  product_id = 0;
   pricelists: any;
   pricelist_id = 0;
   data: any;
@@ -65,6 +68,21 @@ export class ScannerComponent implements OnInit {
     });
   }
 
+  loadProduct(): void {
+    this.barcodeScanner.scan({
+      prompt: 'Scan Product Barcode',
+      resultDisplayDuration: 0
+    }).then(barcodeData => {
+      if (this.product_id !== 0) {
+        this.odoo.write('product.product', this.product_id, {barcode: barcodeData.text}).subscribe((res: any) => {
+          alert('Barcode update success');
+        });
+      }
+    }).catch(err => {
+      alert(err);
+    });
+  }
+
   getPricelist(): void {
     this.odoo.searchRead('product.pricelist', [],
     {fields: ['name']})
@@ -107,6 +125,28 @@ export class ScannerComponent implements OnInit {
         this.err = 'Product not found, N° ' + barcode;
       }
     });
+  }
+
+  getProducts(): void {
+    this.products.length = 0;
+    this.loading_product_odoo = true;
+
+    this.odoo.searchRead('product.product', [],
+    {fields: ['name']})
+    .subscribe((res: any) => {
+      this.loading_product_odoo = false;
+      if (res.length > 0) {
+        this.product_id = res[0].id;
+        this.products = res;
+      }
+    });
+  }
+
+  tabChange(e: any): void {
+    if (e.index === 1) {
+      this.loading_product_odoo = true;
+      this.getProducts();
+    }
   }
 
   logout(): void {

@@ -16,6 +16,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSelectModule } from '@angular/material/select';
+import { MatTabsModule } from '@angular/material/tabs';
 
 /*MyComponents*/
 import { AppComponent } from './app.component';
@@ -48,7 +49,8 @@ const appRoutes: Routes = [
     MatInputModule,
     MatButtonModule,
     MatProgressSpinnerModule,
-    MatSelectModule
+    MatSelectModule,
+    MatTabsModule
   ],
   providers: [
     BarcodeScanner
