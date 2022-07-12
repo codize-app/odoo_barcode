@@ -1,13 +1,14 @@
 # Odoo Barcode
 
-App for scan barcode with mobile and send it to Odoo Server, Android and iOS. Develop by [Moldeo Interactive](https://www.moldeointeractive.com.ar).
+App for scan barcode with mobile and send it to Odoo Server, Android and iOS. Develop by [Codize](https://www.codize.ar).
 
-Develop with Angular and Cordova.
+Develop with Angular and Capacitor.
 
 Developer: Ignacio Buioli
 
 ## Devices Testing
 
+* LG LM-X540HM - Android 10
 * Huawei SCL-L03 - Android 5.1.1
 
 ## Development server
@@ -16,4 +17,4 @@ Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app w
 
 ---
 
-Contact: info@moldeointeractive.com.ar
+Contact: info@codize.ar
