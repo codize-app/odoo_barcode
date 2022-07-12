@@ -7,14 +7,24 @@
       <hr>
       <div class="w-100">
         <!--button mat-raised-button color="accent" class="w-100">Load Barcode</button-->
-        <button mat-raised-button color="accent" class="w-100" (click)="scanProduct()">Scan Product</button>
+        <button class="w-100" mat-raised-button color="warn" (click)="logout()">Log out</button>
+        <button mat-raised-button color="accent" class="w-100 mt-3" (click)="scanProduct()">Scan Product</button>
+        <!--button mat-raised-button color="accent" class="w-100 mt-3" (click)="getProduct('789789789')">Scan Product</button-->
       </div>
+      <!--mat-form-field class="w-100 mt-2" appearance="fill">
+        <mat-label>Select Pricelist</mat-label>
+        <mat-select [(ngModel)]="pricelist_id" [ngModelOptions]="{standalone: true}" name="pricelist">
+          <mat-option *ngFor="let pricelist of pricelists" [value]="pricelist.id">
+            {{pricelist.name}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field-->
       <mat-progress-spinner diameter="30" color="primary" mode="indeterminate" class="mt-2 mr-auto ml-auto" *ngIf="loading_product">
       </mat-progress-spinner>
-      <div *ngIf="product" class="text-center text-white mt-2">
+      <div *ngIf="product" class="text-center text-white mt-3">
         <img [src]="'data:image/jpeg;base64,' + product.image" class="img-fluid" *ngIf="product.image != false" />
-        <h4>{{product.name}}</h4>
-        <h6 class="barcode">BarCode N°: {{product.barcode}}</h6>
+        <h4 class="mt-2">{{product.name}}</h4>
+        <h6 class="barcode">Barcode N°: {{product.barcode}}</h6>
         <h3>{{product.lst_price | currency:product.currency:'symbol':'':local}}</h3>
       </div>
       <div *ngIf="err !== ''" class="text-center text-white mt-2">
