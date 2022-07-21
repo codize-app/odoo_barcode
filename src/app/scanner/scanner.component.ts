@@ -21,6 +21,10 @@ export class ScannerComponent implements OnInit {
   product_id = 0;
   pricelists: any;
   pricelist_id = 0;
+  pricelist_name = '';
+  pricelist_currency = 'ARS';
+  pricelist_price = 0;
+  is_module_install = false;
   data: any;
   local = Globals.local;
   err = '';
@@ -48,9 +52,15 @@ export class ScannerComponent implements OnInit {
         this.data = data;
         this.odoo.login().subscribe((res: any) => {
           if (res !== false) {
-            Globals.uid = res;
-            this.getPricelist();
-            this.loading = false;
+            this.odoo.searchRead('ir.module.module', [['name', '=', 'odoo_barcode_connector'],['is_installed_on_current_website', '=', true]], {fields: ['id']})
+            .subscribe((mod: any) => {
+              if (mod.length > 0) {
+                this.is_module_install = true;
+              }
+              Globals.uid = res;
+              this.getPricelist();
+              this.loading = false; 
+            });
           }
         });
       });
@@ -85,14 +95,22 @@ export class ScannerComponent implements OnInit {
 
   getPricelist(): void {
     this.odoo.searchRead('product.pricelist', [],
-    {fields: ['name']})
+    {fields: ['name', 'currency_id']})
     .subscribe((res: any) => {
       console.log(res);
       if (res.length > 0) {
         this.pricelist_id = res[0].id;
+        this.pricelist_name = res[0].name;
+        this.pricelist_currency = res[0].currency_id[1];
         this.pricelists = res;
       }
     });
+  }
+
+  changePricelist(e: any): void {
+    const pl = this.pricelists.find((element: any) => element.id === e.value);
+    this.pricelist_name = pl.name;
+    this.pricelist_currency = pl.currency_id[1];
   }
 
   getProduct(barcode: string): void {
@@ -121,6 +139,11 @@ export class ScannerComponent implements OnInit {
           barcode: barcode,
           currency: res[0].currency_id[1]
         };
+
+        this.odoo.customArgs('product.pricelist', [[this.pricelist_id], res[0].id, 1, 1, false, false], 'web_api_get_product_price')
+        .subscribe((p: any) => {
+          this.pricelist_price = p[0];
+        });
       } else {
         this.err = 'Product not found, N° ' + barcode;
       }

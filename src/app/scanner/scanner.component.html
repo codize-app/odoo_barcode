@@ -10,26 +10,28 @@
         <mat-tab label="Get Product">
           <button mat-raised-button color="accent" class="w-100 mt-3" (click)="scanProduct()">Scan Product</button>
           <!--button mat-raised-button color="accent" class="w-100 mt-3" (click)="getProduct('789789789')">Scan Product</button-->
-          <!--mat-form-field class="w-100 mt-2" appearance="fill">
+          <mat-form-field class="w-100 mt-2" appearance="fill" *ngIf="is_module_install">
             <mat-label>Select Pricelist</mat-label>
-            <mat-select [(ngModel)]="pricelist_id" [ngModelOptions]="{standalone: true}" name="pricelist">
+            <mat-select [(ngModel)]="pricelist_id" [ngModelOptions]="{standalone: true}" name="pricelist" (selectionChange)="changePricelist($event)">
               <mat-option *ngFor="let pricelist of pricelists" [value]="pricelist.id">
                 {{pricelist.name}}
               </mat-option>
             </mat-select>
-          </mat-form-field-->
+          </mat-form-field>
           <mat-progress-spinner diameter="30" color="primary" mode="indeterminate" class="mt-2 mr-auto ml-auto" *ngIf="loading_product">
           </mat-progress-spinner>
-          <div *ngIf="product" class="text-center text-white mt-3">
+          <div *ngIf="product" class="text-center text-white mt-1">
             <img [src]="'data:image/jpeg;base64,' + product.image" class="img-fluid" *ngIf="product.image != false" />
-            <h4 class="mt-2">{{product.name}}</h4>
-            <h6 class="barcode">Barcode N°: {{product.barcode}}</h6>
-            <h3>{{product.lst_price | currency:product.currency:'symbol':'':local}}</h3>
+            <h5 class="mt-1">{{product.name}}</h5>
+            <p class="barcode">Barcode N°: {{product.barcode}}</p>
+            <h5>List Price: {{product.lst_price | currency:product.currency:'symbol':'':local}}</h5>
+            <h4 *ngIf="pricelist_price > 0">{{pricelist_name}}: {{pricelist_price | currency:pricelist_currency:'symbol':'':local}}</h4>
           </div>
           <div *ngIf="err !== ''" class="text-center text-white mt-2">
             <h4>{{err}}</h4>
           </div>
         </mat-tab>
+
         <mat-tab label="Update Products">
           <button mat-raised-button color="accent" class="w-100 mt-3" *ngIf="!loading_product_odoo" (click)="loadProduct()">Load Barcode</button>
           <mat-progress-spinner diameter="30" color="primary" mode="indeterminate" class="mt-2 mr-auto ml-auto" *ngIf="loading_product_odoo">
