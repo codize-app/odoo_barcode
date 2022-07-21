@@ -140,10 +140,12 @@ export class ScannerComponent implements OnInit {
           currency: res[0].currency_id[1]
         };
 
-        this.odoo.customArgs('product.pricelist', [[this.pricelist_id], res[0].id, 1, 1, false, false], 'web_api_get_product_price')
-        .subscribe((p: any) => {
-          this.pricelist_price = p[0];
-        });
+        if (this.is_module_install) {
+          this.odoo.customArgs('product.pricelist', [[this.pricelist_id], res[0].id, 1, 1, false, false], 'web_api_get_product_price')
+          .subscribe((p: any) => {
+            this.pricelist_price = p[0];
+          });
+        }
       } else {
         this.err = 'Product not found, N° ' + barcode;
       }
