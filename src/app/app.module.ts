@@ -12,11 +12,11 @@ import localeExtra from '@angular/common/locales/extra/es-AR';
 registerLocaleData(locale, 'es-AR', localeExtra);
 
 /*NgMaterial*/
-import { MatButtonModule } from '@angular/material/button';
-import { MatInputModule } from '@angular/material/input';
-import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { MatSelectModule } from '@angular/material/select';
-import { MatTabsModule } from '@angular/material/tabs';
+import { MatLegacyButtonModule as MatButtonModule } from '@angular/material/legacy-button';
+import { MatLegacyInputModule as MatInputModule } from '@angular/material/legacy-input';
+import { MatLegacyProgressSpinnerModule as MatProgressSpinnerModule } from '@angular/material/legacy-progress-spinner';
+import { MatLegacySelectModule as MatSelectModule } from '@angular/material/legacy-select';
+import { MatLegacyTabsModule as MatTabsModule } from '@angular/material/legacy-tabs';
 
 /*MyComponents*/
 import { AppComponent } from './app.component';
@@ -45,7 +45,7 @@ const appRoutes: Routes = [
     BrowserAnimationsModule,
     FormsModule,
     RouterModule,
-    RouterModule.forRoot(appRoutes, { anchorScrolling: 'enabled', relativeLinkResolution: 'legacy' }),
+    RouterModule.forRoot(appRoutes, { anchorScrolling: 'enabled' }),
     MatInputModule,
     MatButtonModule,
     MatProgressSpinnerModule,
